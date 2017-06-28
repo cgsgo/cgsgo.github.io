@@ -1,0 +1,228 @@
+﻿<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+        <title>    爱·纪念   </title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+                @font-face {
+                        font-family: digit;
+                        src: url('ttf/digital-7_mono.ttf') format("truetype");
+                };
+                @font-face {
+                        font-family: minijhb;
+                        src: url('ttf/minijianhangbeikai.TTF') format("truetype");
+		};
+        </style>
+        <link href="css/default_dev.css" type="text/css" rel="stylesheet">
+        <link href="css/style.css" type="text/css" rel="stylesheet">
+        <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="js/garden_dev.js"></script>
+        <script type="text/javascript" src="js/functions_dev.js"></script>
+        <script src="js/script.js" type="text/javascript"></script>
+</head>
+<body>
+        <div id="mainDiv">
+                <div id="content">
+                       <div class="menu" id="fd" style="display:none">
+                           <div class="box" style="display:none;">
+                               <a class="t1" onclick="ShowGirlBirth();"></a>
+                               <a class="t2" onclick="ShowBoyBirth();"></a>
+                               <a class="t3" onclick="ShowLianAi();"></a>
+                               <a class="t4" onclick="ShowLingZhengDay();"></a>
+                               <a class="t5" onclick="ShowWeddingDay();"></a>
+                               <a class="t6" onclick="ShowFeature();"></a>
+                           </div>
+                           </div> 
+                        <div id="code">
+                            <div ><span class="title" style="margin-left:40px">爱的纪念</span></div>
+			    <span class="comments"  style="font-style:italic;margin-left:80px">—--谨以此站献给我最亲爱的宝贝</span><br>	
+			    <span class="comments"> 
+              亲爱的 我是多么的幸运<br />
+              能够在你最美丽的时刻遇见你<br />
+              我们以最不可思议的方式出现在彼此的人生里<br />
+              或许前方的路还很长 甚至充满了困难<br />
+              但我会牵着你的手  坚定的一步一步走下去<br />
+              异地和时差可能真的令人恐惧<br />
+              但是亲爱的，你放心<br />
+              我们会心连心，永远牵挂着彼此<br />
+              虽然我现在能为你做的还很少<br />
+              但我会改掉自己的一身臭毛病<br />
+              争取多学些笑话讲给你听，然后看你这世间最美的笑容<br />
+              我会多学些黄段子，成为你的污妖王<br />
+              我会更加努力 ，不断地提升自己<br />
+              以后会陪你疯陪你笑<br />
+              陪你去周游世界 拍你最美的身影<br />
+              陪你去吃遍全球 养出最肥的你（逃<br />
+              亲爱的，我们的路才刚刚开始<br />
+              可能你会害怕，时间久了，爱情会在平凡的生活面前慢慢变淡<br />
+              可能你会担心，爱情会被时间慢慢地被消磨殆尽<br />
+              但是这是上天对我们最大的考验<br />
+              我们的爱情会因此而更加坚定<br />
+              让我们一起去克服它<br />
+              亲爱的<br />
+              我不会说一些甜言蜜语，也不会给你许下海枯石烂的誓言<br />
+              我只想和你平平淡淡的过一辈子<br />
+              幸福的陪着你过好每一天<br />
+              亲爱的，我的世界只有你<br />
+              纵使相隔万里，但我的心会永远跟你在一起<br />
+              我们要稳定的经营我们的恋爱<br />
+              直至踏入婚姻的殿堂<br />
+              这才是我们最大的目标、共同的幸福<br />
+              让我们共同分享每一天的平凡、每一刻的幸福和感动，每一秒的丝丝甜蜜<br />
+              永远爱你，亲爱的老婆
+              献给我最爱的芳宝～<br />
+              love you forever...<br />
+                        </div>
+                        <div id="loveHeart">
+                            <canvas id="garden"></canvas>
+                            <canvas id="leftimg" width="200" height="200" style="display:none"></canvas> 
+                            <canvas id="rightimg" width="200" height="200" style="display:none"></canvas> 
+                            <div id="words"></div>
+                        </div>
+                </div>
+                <div id="copyright">
+                </div>
+        </div>
+        <script type="text/javascript">
+		if (!document.createElement('canvas').getContext) {
+        		var msg = document.createElement("div");
+        		msg.id = "errorMsg";
+        		msg.innerHTML = "你使用的浏览器版本太低了，不能支持HTML5的页面!<br/></br>" + 
+        			"推荐使用<b>Chrome 14+ / IE 9+ /Firefox 7+ / Safari 4+ / 360浏览器6+极速模式</b>"; 
+        		document.body.appendChild(msg);
+        		$("#code").css("display", "none")
+        			$("#copyright").css("position", "absolute");
+        		$("#copyright").css("bottom", "10px");
+        		document.execCommand("stop")
+		}
+		loadAllImg();
+		var displayMode = 1;
+		var beginwriter = 0;
+		var together = new Date();
+		var offsetX = $("#loveHeart").width() / 2;
+		var offsetY = $("#loveHeart").height() / 2 - 55;
+		$("#loveHeart").click(function(){
+                			displayMode *= -1;
+                			timeElapse(together, displayMode);
+				});
+                
+		ShowLianAi();
+                function drawLoveHeart(imgtype, year, month, day, hour) 
+		{
+			clearCanvas();
+			drawGarden();
+                	together.setFullYear(year, month - 1/*0~11*/, day);
+                	together.setHours(hour);
+                	together.setMinutes(0);
+                	together.setSeconds(0);
+                	together.setMilliseconds(0);
+                	
+                	setTimeout(function () {
+                			adjustWordsPosition();
+                			startHeartAnimation(50);
+                			drawImgeInHeart(imgtype);
+                			}, 3000);
+                
+                	timeElapse(together, displayMode);
+                	setInterval(function () {
+                			timeElapse(together, displayMode);
+                			}, 500);
+                	adjustCodePosition();
+			if ( beginwriter == 0 ) {
+				beginwriter = 1;
+                		$("#code").typewriter();
+			}
+                } 
+
+		function clearCanvas()
+		{
+                    var $left = $("#leftimg");
+                    var cleft = $left[0].getContext("2d");
+		    cleft.clearRect(0, 0, $left[0].width, $left[0].height);
+                    var $right = $("#rightimg");
+                    var cright = $right[0].getContext("2d");
+		    cright.clearRect(0, 0, $right[0].width, $right[0].height);
+                    var $garden = $("#garden");
+                    var cgarden = $garden[0].getContext("2d");
+		    cgarden.clearRect(0, 0, $garden[0].width, $garden[0].height);
+		}
+
+                function drawImgeInHeart(imgtype)
+                {
+                    var $left = $("#leftimg");
+                    var cleft = $left[0].getContext("2d");
+                    var leftimg = new Image();
+                    leftimg.src = "img/"+ imgtype +".JPG";
+                    leftimg.onload = function () {
+                            cleft.drawImage(leftimg, 0, 0);
+                    }
+                
+                    var $right = $("#rightimg");
+                    var cright = $right[0].getContext("2d");
+                    var rightimg = new Image();
+                    rightimg.src = "img/"+ imgtype +"1.JPG";
+                    rightimg.onload = function () {
+                            cright.drawImage(rightimg, 0, 0);
+                    };
+                
+                    $('#leftimg').css("position", "absolute");
+                    $('#leftimg').css("top", $("#garden").position().top + 65);
+                    $('#leftimg').css("left", $("#garden").position().left + 96);
+                    $('#leftimg').fadeIn(1000);
+                
+                    $('#rightimg').css("position", "absolute");
+                    $('#rightimg').css("top", $("#garden").position().top + 65);
+                    $('#rightimg').css("left", $("#garden").position().left + $("#garden").width() - 275);
+                    $('#rightimg').fadeIn(1000);
+                    $('#fd').fadeIn(1000);
+                }
+		
+		function ShowGirlBirth()
+		{
+		    $("#words").html( '<div id="messages"> 距离小仙女降临这世界已有 <div id="elapseClock"></div> </div> <div id="loveu"> 愿宝贝儿开心度过每一天。<br/> <div class="signature">--- By 硕宝</div> </div>');
+		    drawLoveHeart("gbirth", 1999, 03, 03, 21);
+		}
+
+		function ShowBoyBirth()
+		{
+		    $("#words").html( '<div id="messages"> 我的生日，至今已<div id="elapseClock"></div> </div> <div id="loveu"> Nothing is impossible.<br/> <div class="signature">Believe Yourself!</div> </div>');
+		    drawLoveHeart("bbirth", 1998, 02, 10, 21);
+		}
+
+		function ShowLingZhengDay()
+		{
+		    //("#words").html( '<div id="messages">距离我们领证的日子已过去<div id="elapseClock"></div> </div> <div id="loveu"> 婚姻不是围城，是幸福的城堡.<br/> <div class="signature">---爱的见证</div> </div>');
+		    //drawLoveHeart("lingzheng", 2013, 10, 22, 15);
+        alert("哈哈，别着急，宝贝，我们一步一步来！");
+		}
+
+		function ShowWeddingDay()
+		{
+		   // $("#words").html( '<div id="messages">我们举行婚礼啦，到现在已度过<div id="elapseClock"></div> </div> <div id="loveu"> 你永远是我最美的新娘.<br/> <div class="signature">执子之手，与子偕老</div> </div>');
+		    //drawLoveHeart("wedding", 2014, 2, 25, 9);
+        alert("宝贝，我和你一样期待着这一天的到来！");
+		}
+	
+		function ShowFeature()
+		{
+			alert("这个留给未来，爱的结晶！");
+		}
+			
+		function ShowLianAi()
+		{
+		    $("#words").html( '<div id="messages"> 亲爱的芳宝，我们恋爱至今已有 <div id="elapseClock"></div> </div> <div id="loveu"> 爱你到永远···<br/> <div class="signature">--- By 硕宝</div> </div>');
+		    drawLoveHeart("lianAi", 2017, 06, 28, 08);
+		}
+		function loadAllImg()
+		{
+      var myImages = ['img/lianAi.jpg', 'img/lianAi1.jpg', 'img/gbirth.jpg']; 
+			//var myImages = ['img/imag.JPG', 'img/imag1.JPG', 'img/imag3.JPG', 'img/img.JPG']; 
+			for(var i = 0; i != myImages.length; i++) { 
+			    	var img = new Image();
+			  	img.src = myImages[i];
+			}
+		}
+        </script>
+	<audio src="TheRose.mp3" autoplay="autoplay" loop="loop">
+</body>
+</html>
